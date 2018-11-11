@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Share/_Layout.cshtml";
+}
+
+<div style="padding:10px;">
+    <div class="layui-tab layui-tab-brief" lay-unauto lay-allowClose="true" lay-filter="mainTab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">
+                网站设置
+            </li>
+            <li>用户管理</li>
+            <li>权限管理</li>
+            <li>商品管理</li>
+            <li>订单管理</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <button class="layui-btn">一个标准的按钮</button>
+                <a href="http://www.layui.com" class="layui-btn">可跳转的按钮</a>
+                <button class="layui-btn layui-btn-primary">原始按钮</button>
+                <button class="layui-btn">系统默认按钮</button>
+                <button class="layui-btn layui-btn-normal">百搭按钮</button>
+            </div>
+            <div class="layui-tab-item">
+                <button class="layui-btn layui-btn-radius layui-btn-primary">圆角按钮</button>
+                <button class="layui-btn layui-btn-radius">默认圆角</button>
+                <button class="layui-btn layui-btn-radius layui-btn-normal">百搭圆角</button>
+
+            </div>
+            <div class="layui-tab-item">
+                3
+            </div>
+            <div class="layui-tab-item">
+                4
+            </div>
+            <div class="layui-tab-item">
+                5
+            </div>
+        </div>
+    </div>
+    <h2>Index</h2>
+    <button id="btnAddTab" name="btnAddTab" class="layui-btn layui-btn-normal" lay-filter="btnAddTabFilter">添加一个tab页</button>
+    <button class="layui-btn site-demo-active" data-type="tabAdd">新增Tab项</button>
+    <hr/>
+
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="txtName" required lay-verify="required" placeholder="" class="layui-input" />
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="txtPass" required lay-verify="required" class="layui-input" />
+            </div>
+            <div class="layui-form-mid layui-word-aux">长度至少要6个数字或字母，不能带有特殊字符</div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="btnSubmitFilter">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+@section scripts{
+    <script>
+        layui.use(['element', 'layer', 'form'], function () {
+            var layer = layui.layer;
+            var form = layui.form;
+            var element = layui.element;
+            $ = layui.jquery;
+
+            $(".site-demo-active").on('click', function () {
+                layer.msg('you click me');
+            });
+
+            $("#btnAddTab").on('click', function () {
+                element.tabAdd('mainTab', {
+                    title: '新选项' + (Math.random() * 1000 | 0)
+                    , content: '内容' + (Math.random() * 1000 | 0)
+                    , id: new Date().getTime()
+                });
+            });
+
+            form.on('submit(btnSubmitFilter)', function (data) {
+                var submitData = JSON.stringify(data.field);
+                $.ajax({
+                    url: '/Home/SubmitForm',
+                    data: { json: submitData },
+                    type: 'POST',
+                    success: function (json, options) {
+                        debugger;
+                        console.log(json);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+}

@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "filesystem",
+  "libraries": [
+    {
+      "library": "C:\\Resources\\layui\\layui-v2.4.5\\layui\\",
+      "destination": "wwwroot/lib/layui/"
+    }
+  ]
+}

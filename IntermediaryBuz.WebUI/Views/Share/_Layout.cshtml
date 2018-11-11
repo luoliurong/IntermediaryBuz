@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maxium-scale=1" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/layui/css/layui.css" />
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout-admin">
+        <div class="layui-header">
+            @await Html.PartialAsync("_LayoutHeader.cshtml");
+        </div>
+
+        <div class="layui-side layui-bg-cyan">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree" lay-filter="sidenav">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;">默认展开</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="">邀请大佬来打call</a></dd>
+                            <dd><a href="">创建超级大任务</a></dd>
+                            <dd><a href="">管理我的小金库</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">解决方案</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="">移动模块</a></dd>
+                            <dd><a href="">后台模板</a></dd>
+                            <dd><a href="">电商平台</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="" lay-filter="activecommunity">活跃社区</a></li>
+                    <li class="layui-nav-item"><a href="">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            @RenderBody()
+        </div>
+
+        <div class="layui-footer">
+            &copy; Intermediary Buz Corp.
+        </div>
+    </div>
+
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="~/lib/layui/layui.js"></script>
+    <script>
+        layui.config({
+            version: false //一般用于更新模块缓存，默认不开启。设为true即让浏览器不缓存。也可以设为一个固定的值，如：201610
+            , debug: true //用于开启调试模式，默认false，如果设为true，则JS模块的节点会保留在页面
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
